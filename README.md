@@ -96,24 +96,24 @@ For tensorflow 1.6.0 currently setup in venv, CUDA v9.0 and `cudnn-9.0-windows10
                 z_1.tif
                 z_2.tif
                 ...
-     ```
- 
+    ```
+
  3. Run `python train.py -h` to see usage and input arguments. The output on terminal should look like below -
      ```
     usage: train.py [-h] [-out OUT]
-                    [-arch {unet,unet_fixed,hourglass_wres,hourglass_wores}]
+                    [-arch e{unet,unet_fixed,hourglass_wres,hourglass_wores}]
                     [-mode {2D,2.5D,3D}] [-depth DEPTH] [-loss {l2,l1}]
                     [-epochs EPOCHS] [-lr LR] [-bs BS] [-tsize TSIZE]
                     data run {1,0}
-
+     
     train CNN model to denoise volumetric functional recordings
-
+     
     positional arguments:
       data                  training data path
       run                   run number to distinguish different runs
       {1,0}                 1 if train network on max projection of 3D stacks else
                             0
-
+     
     optional arguments:
       -h, --help            show this help message and exit
       -out OUT              location for saving results
@@ -129,7 +129,7 @@ For tensorflow 1.6.0 currently setup in venv, CUDA v9.0 and `cudnn-9.0-windows10
       -lr LR                learning rate (default is 0.001)
       -bs BS                batch size of training (default is 6)
       -tsize TSIZE          data size (number of images) to use for training
-      ```
+    ```
       e.g. to train the network on whole-brain data with following settings -
       - data path - `/training_data` (path should have forward slashes '/')
       - run number - `1`
@@ -144,7 +144,7 @@ For tensorflow 1.6.0 currently setup in venv, CUDA v9.0 and `cudnn-9.0-windows10
      run following commands -
      1) `env\Scripts\activate.bat`
      2) `python train.py /training_data 1 0 -out Results -arch unet_fixed -mode 2D -loss l1 -epoch 200 -bs 10`
- 
+
  4. Once training is finished a folder named `run_unet_fixed_l1_mp0_m2D_d1_1_[tsize]` will be created in `Results` folder. Output files in this folder should look like below (e.g. shown for a sample run)
      ```
     Results
@@ -171,7 +171,7 @@ For tensorflow 1.6.0 currently setup in venv, CUDA v9.0 and `cudnn-9.0-windows10
             Y_2227.png
             Y_2492.png
             Y_335.png
-     ```
+    ```
     Here -
     - `training_loss.txt` stores epoch wise loss information on randomly sampled images from training data and test data.
     - `test_data_loss.txt` stores loss on randomly sampled images from test data.
@@ -205,13 +205,13 @@ For tensorflow 1.6.0 currently setup in venv, CUDA v9.0 and `cudnn-9.0-windows10
 2. Run `python inference.py -h` to see usage and input arguments. Output on terminal should look like below - 
     ```
     usage: inference.py [-h] data [data ...] run
-
+    
     denoise images using weights of trained model
-
+    
     positional arguments:
       data        paths of datasets to be denoised
       run         path of saved trained model
-
+    
     optional arguments:
       -h, --help  show this help message and exit
     ```
